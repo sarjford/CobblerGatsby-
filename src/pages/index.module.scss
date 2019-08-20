@@ -1,0 +1,388 @@
+.homepage {
+  h3 {
+    margin: 22px auto 12px;
+  }
+  .cobbler-steps {
+    margin: 20px auto 30px;
+    h2 {
+      margin-bottom: 8px;
+    }
+  }
+
+  .home__content {
+    margin-bottom: 10px;
+    navigation, h1 {
+      display: none;
+    }
+  }
+  .home__form {
+    margin-bottom: 36px;
+    margin-top: 24px;
+  }
+  .home__hero {
+    position: relative;
+    img {
+      width: 100%;
+      display: block;
+    }
+    h1 {
+      color: #fff;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .home__text {
+    margin-bottom: 24px;
+  }
+  span.email-error {
+    font-size: .875rem;
+    color: #ff6d6d;
+    margin-bottom: 10px;
+    display: block;
+  }
+  input.email-error {
+    border: 1px solid #ff6d6d;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .home__hero {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+    .home__content {
+      max-width: 500px;
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+    .homepage {
+      h3 {
+        margin: 36px auto 12px;
+      }
+    }
+    .home__form {
+      margin-bottom: 48px;
+    }
+    .home__content.page-container {
+      padding: 0px 20px 20px;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .homepage {
+      display: grid;
+      grid-template-columns: 512px 1fr;
+      grid-template-rows: auto 1fr;
+      // background: #d8d8d8;
+      navigation {
+        order: 2;
+      }
+      .home__hero {
+        order: 1;
+        grid-row: 1 / 3;
+      }
+      .home__content {
+        order: 3;
+      }
+    }
+    .home__content {
+      h1 {
+        display: block;
+        font-size: 3.5rem;
+      }
+    }
+    .home__hero {
+      h1 {
+        display: none;
+      }
+    }
+    .home__content.page-container {
+      padding: 0 40px;
+    }
+  }
+
+  @media only screen and (min-width: 1440px) {
+    .homepage {
+      grid-template-columns: 800px 1fr;
+    }
+  }
+
+}
+
+
+
+
+
+// .homepage-content > img {
+//   width: 90%;
+//   margin: 0 auto;
+//   margin-bottom: 2rem;
+//   display: block;
+// }
+
+// .description p:last-child {
+//   margin: 0 0 0;
+// }
+
+// .available-services {
+//   min-width: 200px;
+//   width: 60%;
+//   margin: 0 auto;
+//   margin-top: 3rem;
+//   margin-bottom: 3rem;
+
+//   img {
+//     width: 100%;
+//     margin: 1em auto;
+//     display: block;
+//   }
+//   div {
+//     margin: 0 auto;
+//     display: block;
+//   }
+//   h6 {
+//     margin: 0 0 0 1.6rem;
+//     line-height: 1.83;
+//   }
+//   span {
+//     margin-right: .825rem;
+//   }
+// }
+
+// .diagram {
+//   background: #f3f3f3;
+//   border: solid .4rem #e6e6e6;
+//   text-align: center;
+//   padding-top: 4rem;
+//   margin-bottom: 4rem;
+
+//   h2 {
+//     width: 75%;
+//     margin: 0 auto 1.5rem;
+//   }
+//   img {
+//     width: 40%;
+//     display: block;
+//     margin: 0 auto 1.5rem;
+//   }
+//   h6:nth-of-type(1) {
+//     text-align: center;
+//     font-weight: bold;
+//   }
+//   span {
+//     visibility: hidden;
+//     display: block;
+//   }
+// }
+// .diagram > div {
+//   vertical-align: top;
+//   width: 75%;
+//   margin: 0 auto;
+//   margin-bottom: 4rem;
+// }
+
+// .start-repair-process > *, button {
+//   margin: 0 auto;
+// }
+// .start-repair-process {
+//   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.16);
+// 	border: solid 1px #000000;
+//   text-align: center;
+//   padding-top: 2.125rem;
+//   padding-bottom: 2.125rem;
+//   margin-bottom: 4rem;
+//   position: relative;
+
+//   h4 {
+//     margin-bottom: .5rem;
+//     width: 60%;
+//     text-transform: uppercase;
+//   }
+//   h6 {
+//     width: 60%;
+//     margin-bottom: 1.625rem;
+//   }
+//   form {
+//     width: 100%;
+//   }
+//   input {
+//     border: solid 1px #979797;
+//     display: block;
+//     width: 88%;
+//     margin: 0 auto;
+//     margin-bottom: 1rem;
+
+//   }
+//   input.email-error {
+//     border: solid red;
+//   }
+//   button {
+//     width: 80%;
+//     display: block;
+//     background: #000;
+//     color: #fff;
+//     border: 2px solid #fff;
+
+//     &:hover {
+//       background: #fff;
+//       color: #000;
+//       border: 2px solid #000;
+//     }
+//   }
+//   span {
+//     display: none;
+//     margin-top: 10px;
+//     font-size: .725rem;
+//     color: red;
+//   }
+//   span.email-error {
+//     display: block;
+//   }
+// }
+
+// .no-error {
+// }
+// h6 a {
+//   font-size: 0.75rem;
+// }
+
+// @media only screen and (min-width: 576px) {
+//   .homepage-content > img {
+//     width: 60%;
+//     margin-bottom: 3rem;
+//   }
+
+//   .available-services {
+//     margin-top: 2.5rem;
+//     margin-bottom: 2.5rem;
+//     img {
+//       width: 42%;
+//     }
+//     h6 {
+//       margin: 0 0 .2rem 20%;
+//     }
+//     div {
+//       width: 60%;
+//       margin: 0 auto;
+//     }
+//   }
+
+//   .description {
+//     width: 80%;
+//     margin: 0 auto;
+//     p {
+//       font-size: .75rem;
+//     }
+//   }
+
+//   .diagram {
+//     padding: 1.778rem 0;
+//     h6 {
+//       font-size: .6em;
+//       margin-bottom: .875rem;
+//     }
+//     img {
+//       position: absolute;
+//       -webkit-transform: translateX(-50%);
+//       transform: translateX(-50%);
+//       left: 50%;
+//       bottom: 1.5rem;
+//       margin: 0;
+//     }
+//     .second img {
+//       width: 60%;
+//     }
+//     div div {
+//       height: 150px;
+//       position: relative;
+//     }
+//   }
+//   .diagram > div {
+//     width: 32%;
+//     display: inline-block;
+//     padding: 0 5%;
+//     box-sizing: border-box;
+//     margin-bottom: 0;
+//   }
+
+//   .start-repair-process {
+//     width: 70%;
+//     margin: 0 auto;
+//     margin-bottom: 4rem;
+//     min-width: 400px;
+
+//     input {
+//       padding: .8em 3%;
+//       box-sizing: border-box;
+//       margin: 0 1%;
+//     }
+//     button {
+//       padding: .9em 0;
+//       font-size: .75em;
+//       margin-top: 20px;
+//     }
+//     input, button {
+//       width: 45%;
+//       display: inline-block;
+//     }
+//   }
+//   h6.terms {
+//     text-align: center;
+//   }
+
+// }
+
+// @media only screen and (min-width: 1024px) {
+
+//   .homepage-content > img {
+//     width: 45%;
+//     margin-bottom: 2.6rem;
+//     margin-top: 3em;
+//   }
+
+//   .available-services {
+//     margin-top: 2.8rem;
+//     margin-bottom: 2.8rem;
+//   }
+
+//   .description {
+//     width: 70%;
+//     margin: 0 auto;
+//   }
+
+//   .diagram div div {
+//     height: 160px;
+//   }
+
+//   .start-repair-process {
+//     max-width: 600px;
+
+//     h6 {
+//       margin-bottom: 1.4rem;
+//       width: 100%;
+//     }
+//   }
+//   input, button {
+//     margin: 0 2%;
+//   }
+
+// }
+
+// @media only screen and (min-width: 1200px) {
+//   .available-services h6 {
+//       margin: 0 0 .2rem 30%;
+//     }
+//   .diagram {
+//     margin-bottom: 3rem;
+//   }
+//   .diagram div div {
+//     height: 200px;
+//   }
+
+// }
