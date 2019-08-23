@@ -10,6 +10,9 @@ import SEO from "../components/seo"
 
 import { AppContext } from '../components/Context';
 
+import Field from '../components/userInfoField';
+import Button from '../components/button';
+
 
 
 export default class IndexPage extends React.Component {
@@ -95,7 +98,6 @@ export default class IndexPage extends React.Component {
 
 	render() {
     const appState = this.context;
-    // console.log('inside index', appState)
 
 		return (
       <>
@@ -122,26 +124,61 @@ export default class IndexPage extends React.Component {
                 <h3>Start Your Service</h3>
                 <p>Enter your email and zip code below to start the care process.</p>
                 <form>
-                  <input id="userEmail"
-                    type="email"
-                    className={ this.state.errorClassName }
+                {
+                  // <input id="userEmail"
+                  //   type="email"
+                  //   className={ this.state.errorClassName }
+                  //   value={appState.data.email}
+                  //   onChange={this.updateEmail}
+                  //   placeholder="Email"
+                  //   />
+                  // <input id="userZip"
+                  //   type="text"
+                  //   className={this.state.errorClassName}
+                  //   value={appState.data.zip}
+                  //   onChange={this.updateZip}
+                  //   placeholder="Zip code"
+                  //   />
+                }
+
+                  <Field
+                    placeholder="Email"
+                    name=""
                     value={appState.data.email}
                     onChange={this.updateEmail}
-                    placeholder="Email" />
-                  <input id="userZip"
-                    type="text"
-                    className={ this.state.errorClassName }
+                    inputClass={this.state.errorClassName}
+                    wrapperClass=""
+                    id="userEmail"
+                    type="email"
+                  />
+
+                  <Field
+                    placeholder="Email"
+                    name=""
                     value={appState.data.zip}
                     onChange={this.updateZip}
-                    placeholder="Zip code" />
+                    inputClass={this.state.errorClassName}
+                    wrapperClass=""
+                    id="userZip"
+                    type="text"
+                  />
+
                   <span className={ this.state.errorClassName }>{ this.state.errorMsg }</span>
-                  <button className="btn primary start"
-                    type="btn submit"
-                    onClick={ this.submitBtnHandler }>Start Your Service
-                    {
-                      // {this.state.loading ? <Loading /> : null}
-                    }
-                  </button>
+
+                  <Button
+                    btnClass="primary"
+                    onClick={this.submitBtnHandler}
+                    btnText="Start Your Service"
+                  />
+                  {
+                    // <button className="btn primary start"
+                    //   onClick={ this.submitBtnHandler }>Start Your Service
+                    //   {
+                    //     // {this.state.loading ? <Loading /> : null}
+                    //   }
+                    // </button>
+                  }
+
                 </form>
               </div>
 

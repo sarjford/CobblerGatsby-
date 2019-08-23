@@ -1,51 +1,54 @@
-import React from "react"
+import React from "react";
+import { navigate } from 'gatsby';
 
-export default class Shoe extends Component {
+
+import { AppContext } from '../components/Context';
+import ProductTile from '../components/productTile';
+
+
+export default class Shoe extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.selectShoe = this.selectShoe.bind(this);
-		this.imageLoaded = this.imageLoaded.bind(this);
 	}
+
+  static contextType = AppContext;
 
 	selectShoe(){
-		this.props.setAppState({
+    const appState = this.context;
+		appState.set({
 			selectedShoeIndex: this.props.index,
 		});
-    window.scrollTo(0, 0);
-		route('/step_2');
+    // window.scrollTo(0, 0);
+    navigate('/select-repairs');
 	}
 
-	imageLoaded(){
-		this.props.setAppState({
-			imagesLoaded: this.props.appState.imagesLoaded + 1,
-		});
-	}
-
-	render(props) {
-		let options = props.state.options.split(' / ');
-    // let details =  options[0].toLowerCase() + ' / ' + 'Size ' + options[1];
-    const details = options[1] === '1.0' ? options[0].toLowerCase() : options[0].toLowerCase() + ' / ' + 'Size ' + options[1];
-
-    let imgSrc = props.state.imageSrc ? props.state.imageSrc.replace('.jpg', '_300x.jpg') : '../assets/cobblerMissingShoe.jpg';
-
+	render() {
 		return (
-      <div className="shoe-orders">
-        <button className="single-shoe" onClick={ this.selectShoe }>
-          <div>
-            <div className="img">
-              <img src={imgSrc} onLoad={this.imageLoaded}/>
-            </div>
-
-            <div className="info">
-              <div>
-                <h6>{props.state.name}</h6>
-                <h5>{details}</h5>
-              </div>
-            </div>
-          </div>
-        </button>
-      </div>
+      <ProductTile
+        imgSrc={this.props.data.imageSrc}
+        details={this.props.data.options}
+        productName={this.props.data.name}
+        onClick={this.selectShoe}
+      />
     )
 	}
 }
+
+  // <div className="shoe-orders">
+    // <button className="single-shoe" onClick={this.selectShoe}>
+    //   <div>
+    //     <div className="img">
+    //       <img src={imgSrc} />
+    //     </div>
+    //
+    //     <div className="info">
+    //       <div>
+    //         <h6>{this.props.data.name}</h6>
+    //         <h5>{details}</h5>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </button>
+  // </div>

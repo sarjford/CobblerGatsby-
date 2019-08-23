@@ -49,40 +49,40 @@ h3 {
 ul {
   padding: 0 20px;
 }
-input {
-  font-size: 0.75rem; //12
-  letter-spacing: .5px;
-  padding: 17px 14px;
-  box-sizing: border-box;
-  border: solid 1px #cccccc;
-  display: block;
-  width: 100%;
-  margin: 0 auto;
-  margin-bottom: 10px;
-}
-.btn {
-  display: block;
-  font-size: 0.875rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-sizing: border-box;
-  font-weight: 800;
-  padding: 16px 0;
-  width: 100%;
-  text-align: center;
-  text-decoration: none;
-  margin-bottom: 10px;
-}
+// input {
+//   font-size: 0.75rem; //12
+//   letter-spacing: .5px;
+//   padding: 17px 14px;
+//   box-sizing: border-box;
+//   border: solid 1px #cccccc;
+//   display: block;
+//   width: 100%;
+//   margin: 0 auto;
+//   margin-bottom: 10px;
+// }
+// .btn {
+//   display: block;
+//   font-size: 0.875rem;
+//   letter-spacing: 1px;
+//   text-transform: uppercase;
+//   cursor: pointer;
+//   box-sizing: border-box;
+//   font-weight: 800;
+//   padding: 16px 0;
+//   width: 100%;
+//   text-align: center;
+//   text-decoration: none;
+//   margin-bottom: 10px;
+// }
 
 .primary {
   background: #000;
-  color: #fff;
   border: 2px solid #000;
+  color: #fff;
 }
 .secondary {
-  border: 2px solid #000;
   background: #fff;
+  border: 2px solid #000;
   color: #000;
 }
 

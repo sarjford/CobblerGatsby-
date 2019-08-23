@@ -1,7 +1,20 @@
-import React from "react"
+import React from 'react';
+import styled from "styled-components";
 
-import { AppConsumer } from "../components/Context"
-import SEO from "../components/seo"
+import { AppConsumer } from '../components/Context';
+import SEO from '../components/seo';
+import Shoe from '../components/shoe';
+
+
+// .shoe-order-container
+const ProductTileGridWrapper = styled.div`
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 -20px;
+  }
+`
 
 const SelectShoe = () => (
   <>
@@ -12,9 +25,13 @@ const SelectShoe = () => (
 
         <AppConsumer>
           {({ data, set }) => (
-            <div className="shoe-order-container">
-              {console.log(JSON.stringify(data))}
-            </div>
+            <ProductTileGridWrapper>
+              {console.log(JSON.stringify(data.data))}
+              {data.data.map((shoe, i) => (
+                <Shoe data={shoe} key={i} index={i}/>
+                )
+              )}
+            </ProductTileGridWrapper>
           )}
         </AppConsumer>
 
@@ -24,6 +41,3 @@ const SelectShoe = () => (
 )
 
 export default SelectShoe;
-
-
-              // {data.map(shoe => <div> {shoe.name} </div>)}
