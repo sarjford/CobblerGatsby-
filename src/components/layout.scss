@@ -31,23 +31,39 @@ h1 {
   text-align: center;
   text-transform: uppercase;
 }
+
 p, ul, h2 {
   font-size: 1rem;
   line-height: 1.75;
   letter-spacing: normal;
   margin-bottom: 14px;
 }
+
 h2 {
   font-weight: 800;
 }
+
 h3 {
   font-size: 1.5rem;
   line-height: 1.17;
   font-weight: 800;
   margin-bottom: 10px;
 }
+
 ul {
   padding: 0 20px;
+}
+
+header.step-page-header {
+  text-align: center;
+}
+
+.red-underline {
+  border-bottom: 2px solid #7f272b;
+  padding: 0;
+  &:hover {
+    cursor: pointer;
+  }
 }
 // input {
 //   font-size: 0.75rem; //12
@@ -86,30 +102,31 @@ ul {
   color: #000;
 }
 
-navigation {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  a {
-    display: block;
-  }
-  svg {
-    width: 175px;
-  }
-}
+// navigation {
+//   height: 50px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   a {
+//     display: block;
+//   }
+//   svg {
+//     width: 175px;
+//   }
+// }
 
-.page-container {
-  padding: 25px 20px;
-}
+// .page-container {
+//   padding: 25px 20px;
+// }
 
 
-@media only screen and (min-width: 768px) {
-  .page-container {
-    padding: 40px;
-  }
+// @media only screen and (min-width: 768px) {
+//   .page-container {
+//     padding: 40px;
+//   }
+// }
 
-}
+
 
 @media only screen and (min-width: 1024px) {
 //   .page-container-home {

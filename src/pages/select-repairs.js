@@ -1,12 +1,66 @@
 import React from 'react';
+import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
+import SEO from '../components/seo';
 import { AppContext } from '../components/Context';
-
+import Navigation from '../components/navigation';
 import Checkbox from '../components/checkbox';
-// import Help from './helpPopup';
 import Button from '../components/button';
 import ProductTile from '../components/productTile';
+import ContactUs from '../components/contactUs';
+import PageContainer from '../components/pageContainer';
 
+
+
+const CheckboxError = styled.p`
+  color: #ff6d6d;
+  line-height: 1.71;
+  font-size: 14px;
+  margin-top: 8px;
+`
+const HelpLink = styled.div`
+  margin: 30px 0 32px;
+  text-align: center;
+  a {
+    padding-bottom: 3px;
+    border-bottom: 2px solid #7f272b;
+    cursor: pointer;
+  }
+`
+const FeaturedProduct = styled.div`
+  > div {
+    width: 100%;
+    margin: 0 0 40px;
+  }
+`
+const PageHeader = styled.header`
+  h2 {
+    margin-bottom: 0;
+  }
+  p {
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+`
+const PageWrapper = styled.div`
+  max-width: 425px;
+  margin: 0 auto;
+`
+const RepairOptions = styled.div`
+  margin: 4px 0 16px;
+
+  .checkbox {
+    border: 1px solid black;
+    &.checked {
+      background:#7f272b;
+      border: 1px solid #7f272b;
+    }
+  }
+  &.error .checkbox {
+    border: 1px solid #ff6d6d;;
+  }
+`
 
 const repairs = {
   'Shoes': {
@@ -19,6 +73,15 @@ const repairs = {
     'Minor Scuffs': 298,
   }
 }
+
+const HelpPopup = props => (
+  <section className='help'>
+    <div className='text'>
+      <p>Reach out to our client services team if you have some serious shoe needs and we’ll get you set up:</p>
+    </div>
+    < ContactUs />
+  </section>
+)
 
 export default class Repairs extends React.Component {
 
@@ -37,6 +100,7 @@ export default class Repairs extends React.Component {
   }
 
   toggleCheckbox = (label) => {
+    console.log('click')
     this.setState({ checkboxError: false });
     if (this.selectedCheckboxes.has(label)) {
       this.selectedCheckboxes.delete(label);
@@ -71,82 +135,66 @@ export default class Repairs extends React.Component {
       selectedRepairs: selectedRepairsIds
     });
 
-    // window.scrollTo(0, 0);
-    // route('/step_3');
+    window.scrollTo(0, 0);
+    navigate('/confirm-user-info');
   }
 
   render() {
     const appState = this.context;
     const selectedShoeData = appState.data.data[appState.data.selectedShoeIndex];
-
-    const repairList = selectedShoeData.name.toLowerCase().indexOf('kiss') > -1 ? repairs.Handbags : repairs.Shoes;
     const toggleCheckboxFunc = this.toggleCheckbox;
-    const checkboxes = Object.keys(repairList).map((label, i) => (
-      <Checkbox label={label} handleCheckboxChange={toggleCheckboxFunc} key={i}/>
-    ));
-
-    const checkBoxErrClass = !!this.state.checkboxError ? 'error' : 'no-error';
+    const repairList = selectedShoeData.name.toLowerCase().indexOf('kiss') > -1 ? repairs.Handbags : repairs.Shoes;
 
     return (
-      <section className="page-container">
-        <section className="page-2-repairs">
+      <>
+        <SEO title="Select Repairs" />
+        <Navigation />
 
-          <section className="selected-shoe">
+        <PageContainer>
+          <PageWrapper>
 
-            <ProductTile
-              imgSrc={selectedShoeData.imageSrc}
-              details={selectedShoeData.options}
-              productName={selectedShoeData.name}
-              onClick={null}
+            <FeaturedProduct>
+              <ProductTile
+                imgSrc={selectedShoeData.imageSrc}
+                details={selectedShoeData.options}
+                productName={selectedShoeData.name}
+                onClick={null}
+              />
+            </FeaturedProduct>
+
+            <PageHeader className="step-page-header">
+              <h2>What kind of love do they need?</h2>
+              <p>Check all that apply.</p>
+            </PageHeader>
+
+            <RepairOptions className={!!this.state.checkboxError ? 'error' : ''}>
+
+              {Object.keys(repairList).map((label, i) => (
+                <Checkbox label={label} handleCheckboxChange={toggleCheckboxFunc} key={i}/>
+              ))}
+
+              {this.state.checkboxError &&
+                <CheckboxError>Select a service to continue</CheckboxError>
+              }
+            </RepairOptions>
+
+            <Button
+              btnClass="primary"
+              onClick={this.selectRepairs}
+              btnText="Start Your Service"
             />
 
-            {
-              // <div className="shoe-orders">
-              //   <button className="single-shoe">
-              //     <div>
-              //       <div className="img">
-              //         <img src={imgSrc} onLoad={this.imageLoaded} alt={selectedShoeData.name}/>
-              //       </div>
-              //
-              //       <div className="info">
-              //         <div>
-              //           <h6>{selectedShoeData.name}</h6>
-              //           <h5>{details}</h5>
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </button>
-              // </div>
-            }
+            <HelpLink>
+              <button className="red-underline" onClick={this.toggleHelpPopup}>
+                Don’t see the care you need?
+              </button>
+            </HelpLink>
 
-          </section>
+            {this.state.popupVisible && <HelpPopup hide={this.hideHelpPopup} />}
 
-          <section className="repair-header">
-            <h2>What kind of love do they need?</h2>
-            <p>Check all that apply.</p>
-          </section>
-
-          <section className={`checkboxes ${checkBoxErrClass}`}>
-            {checkboxes}
-            {this.state.checkboxError && <p className="error-msg">Select a service to continue</p>}
-          </section>
-
-          <Button
-            btnClass="primary"
-            onClick={this.selectRepairs}
-            btnText="Start Your Service"
-          />
-
-          <div className="help-popup">
-            <button onClick={ this.toggleHelpPopup }>Don’t see the care you need?</button>
-          </div>
-
-          {
-            // {this.state.popupVisible ? <Help hide={this.hideHelpPopup} /> : null }
-          }
-
-        </section>
-      </section>
+          </PageWrapper>
+        </PageContainer>
+      </>
     );
   }
 }

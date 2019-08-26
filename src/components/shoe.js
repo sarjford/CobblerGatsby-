@@ -1,7 +1,6 @@
 import React from "react";
 import { navigate } from 'gatsby';
 
-
 import { AppContext } from '../components/Context';
 import ProductTile from '../components/productTile';
 

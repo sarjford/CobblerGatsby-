@@ -19,8 +19,6 @@ const Layout = ({ children }) => {
   //   }
   // `)
 
-  console.log('layout')
-
   return (
     <AppProvider>
       <main>{children}</main>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 
 // shoe-orders
@@ -82,7 +82,7 @@ const ProductTile = (props) => {
           </div>
         </TileInner>
       </TileWrapper>
-    )
+  )
 }
 
 

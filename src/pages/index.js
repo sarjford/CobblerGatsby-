@@ -1,19 +1,110 @@
 import React from "react"
-import { navigate } from "gatsby"
+import { navigate } from 'gatsby';
 import axios from 'axios';
+import styled from 'styled-components';
 
-import indexStyles from "./index.module.scss"
+// import indexStyles from "./index.module.scss"
 
-import Layout from "../components/layout"
+// import Layout from "../components/layout"
 // import Image from "../components/image"
 import SEO from "../components/seo"
-
 import { AppContext } from '../components/Context';
-
+import SiteHeader from '../components/siteHeader';
+import IndexPageText from '../components/indexTextContent';
 import Field from '../components/userInfoField';
 import Button from '../components/button';
+import PageContainer from '../components/pageContainer';
+// import SpinnerPopup from '../components/spinnerPopup';
 
 
+
+const DesktopHeader = styled.h1`
+  display: none;
+  @media only screen and (min-width: 1024px) {
+    display: block;
+    font-size: 3.5rem;
+  }
+`;
+const IndexPageLayout = styled.div`
+  h3 {
+    margin: 22px auto 12px;
+  }
+  @media only screen and (min-width: 768px) {
+    h3 {
+      margin: 36px auto 12px;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 512px 1fr;
+    grid-template-rows: auto 1fr;
+    div:nth-child(1) {
+      order: 2;
+    }
+    div:nth-child(2) {
+      order: 1;
+      grid-row: 1 / 3;
+    }
+    div:nth-child(3) {
+      order: 3;
+    }
+    @media only screen and (min-width: 1440px) {
+      grid-template-columns: 800px 1fr;
+    }
+  }
+`;
+const IndexPageHeroSection = styled.div`
+  position: relative;
+  img {
+    width: 100%;
+    display: block;
+  }
+`;
+const IndexPageForm = styled.div`
+  margin-bottom: 36px;
+  margin-top: 24px;
+  span.form-error {
+    font-size: .875rem;
+    color: #ff6d6d;
+    margin-bottom: 10px;
+    display: block;
+  }
+  /* input.email-error {
+    border: 1px solid #ff6d6d;
+  } */
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 48px;
+  }
+`;
+const IndexPageContent = styled(PageContainer)`
+  margin-bottom: 10px;
+  @media only screen and (min-width: 768px) {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 0px 20px 20px;
+  }
+  @media only screen and (min-width: 1024px) {
+    padding: 0 40px;
+  }
+`;
+const MobileHeader = styled.h1`
+  color: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media only screen and (min-width: 768px) {
+    font-size: 3.75rem;
+  }
+  @media only screen and (min-width: 1024px) {
+    display: none;
+  }
+`;
 
 export default class IndexPage extends React.Component {
 
@@ -21,18 +112,16 @@ export default class IndexPage extends React.Component {
     super(props);
     this.state = {
       errorMsg: '',
-      errorClassName: 'no-error',
-      loading: false
+      emailError: '',
+      zipError: '',
+      loading: true
     }
-    this.submitBtnHandler = this.submitBtnHandler.bind(this);
-    this.updateEmail = this.updateEmail.bind(this);
-    this.updateZip = this.updateZip.bind(this);
   }
 
   static contextType = AppContext;
   indexPage = this;
 
-  updateEmail(e){
+  updateEmail = (e) => {
     const appState = this.context;
     this.setState({ errorClassName: '' });
     appState.set({
@@ -40,7 +129,7 @@ export default class IndexPage extends React.Component {
     });
   }
 
-  updateZip(e) {
+  updateZip = (e) => {
     const appState = this.context;
     this.setState({ errorClassName: '' });
     appState.set({
@@ -48,20 +137,46 @@ export default class IndexPage extends React.Component {
     });
   }
 
-  submitBtnHandler(e) {
+  submitBtnHandler = (e) => {
     e.preventDefault();
     const appState = this.context;
     const email = appState.data.email;
     const zip = appState.data.zip;
 
-    const validateEmail = (email) => {
-      const rgxPattern = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-      return rgxPattern.test(email);
-    }
+    const validateFields = (email, zip) => {
+      const stateObject = {};
 
-    const validateZip = (zip) => {
-      const rgxPattern = new RegExp(/^\d{5}$|^\d{5}-\d{4}$/);
-      return rgxPattern.test(zip);
+      const validateEmail = (email) => {
+        const rgxPattern = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        return rgxPattern.test(email);
+      }
+
+      const validateZip = (zip) => {
+        const rgxPattern = new RegExp(/^\d{5}$|^\d{5}-\d{4}$/);
+        return rgxPattern.test(zip);
+      }
+
+      if (!validateEmail(email)) {
+        Object.assign(stateObject, {
+          errorMsg: 'Please enter a valid email address.',
+          emailError: true
+        });
+      }
+
+      if (!validateZip(zip)) {
+        Object.assign(stateObject, {
+          errorMsg: 'Please enter a valid zip code.',
+          zipError: true
+        });
+      }
+
+      if (!validateEmail(email) && !validateZip(zip)) {
+        Object.assign(stateObject, {
+          errorMsg: 'Please enter a valid email address and/or zip code.'
+        });
+      }
+
+      return stateObject;
     }
 
     const fetchOrders = (email, zip) => {
@@ -69,30 +184,38 @@ export default class IndexPage extends React.Component {
         .get(`http://l.tamaramellon.com/api/returns/users?email=${email}&pc=${zip}`)
         .then(orders => {
           console.log('orders ', orders)
-          appState.set({ data: orders.data });
+
+          if (orders.data.length === 0) {
+            this.setState({
+              errorMsg: 'No orders found. For futher assistance, call our customer service team at (866) 419-5500.',
+              loading: false
+            });
+            return;
+          }
+          
+          appState.set({
+            ...orders.data[0].customer,
+            data: orders.data
+          });
           navigate('/select-a-shoe');
         })
         .catch(error => {
           console.log(error)
           this.setState({
             errorMsg: error.response.text,
-            errorClassName: 'email-error',
             loading: false
           });
         })
       }
 
-    if (!validateEmail(email) || !validateZip(zip)) {
-      console.log('invalid email or zip')
-      this.setState({
-        errorMsg: 'Please enter a valid email address and/or zip code.',
-        errorClassName: 'email-error'
-      });
+    // if there are errors, update state and exit function
+    const errorCheck = validateFields(email, zip);
+    if (Object.keys(errorCheck).length > 0) {
+      this.setState(errorCheck);
       return;
     }
-
-    this.setState({ errorMsg: '', errorClassName: '', loading: true });
-
+    // otherwise, continue
+    this.setState({ emailError: false, zipError: false, errorMsg: '', loading: true });
     fetchOrders(email, zip);
   }
 
@@ -102,95 +225,69 @@ export default class IndexPage extends React.Component {
 		return (
       <>
         <SEO title="Home" />
+        <IndexPageLayout id="start-your-service">
 
-        <section className={indexStyles.homepage}>
-          <div className="homepage" id="start-your-service">
-            {
-              // <NavBar />
-            }
+          <SiteHeader />
 
-            <div className="home__hero">
-              <picture>
-                <source media="(min-width: 1024px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_large_1.jpg?772610"/>
-                <source media="(min-width: 768px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_tablet.jpg?772608"/>
-                <img src="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_mobile.jpg?772608" alt="" />
-              </picture>
-              <h1>Cobbler<br/>Concierge</h1>
-            </div>
+          <IndexPageHeroSection>
+            <picture>
+              <source media="(min-width: 1024px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_large_1.jpg?772610"/>
+              <source media="(min-width: 768px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_tablet.jpg?772608"/>
+              <img src="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_mobile.jpg?772608" alt="" />
+            </picture>
+            <MobileHeader>Cobbler<br/>Concierge</MobileHeader>
+          </IndexPageHeroSection>
 
-            <div className="home__content page-container">
-              <h1>Cobbler<br/>Concierge</h1>
-              <div className="home__form">
-                <h3>Start Your Service</h3>
-                <p>Enter your email and zip code below to start the care process.</p>
-                <form>
-                {
-                  // <input id="userEmail"
-                  //   type="email"
-                  //   className={ this.state.errorClassName }
-                  //   value={appState.data.email}
-                  //   onChange={this.updateEmail}
-                  //   placeholder="Email"
-                  //   />
-                  // <input id="userZip"
-                  //   type="text"
-                  //   className={this.state.errorClassName}
-                  //   value={appState.data.zip}
-                  //   onChange={this.updateZip}
-                  //   placeholder="Zip code"
-                  //   />
-                }
+          <IndexPageContent>
+            <DesktopHeader>Cobbler<br/>Concierge</DesktopHeader>
+            <IndexPageForm>
+              <h3>Start Your Service</h3>
+              <p>Enter your email and zip code below to start the care process.</p>
+              <form>
+                <Field
+                  placeholder="Email"
+                  name=""
+                  value={appState.data.email}
+                  onChange={this.updateEmail}
+                  error={this.state.emailError}
+                  wrapperClass=""
+                  id="userEmail"
+                  type="email"
+                />
+                <Field
+                  placeholder="Zip Code"
+                  name=""
+                  value={appState.data.zip}
+                  onChange={this.updateZip}
+                  error={this.state.zipError}
+                  wrapperClass=""
+                  id="userZip"
+                  type="text"
+                />
+                <span
+                  className={this.state.errorMsg.length ? 'form-error' : ''}>
+                  {this.state.errorMsg}
+                </span>
 
-                  <Field
-                    placeholder="Email"
-                    name=""
-                    value={appState.data.email}
-                    onChange={this.updateEmail}
-                    inputClass={this.state.errorClassName}
-                    wrapperClass=""
-                    id="userEmail"
-                    type="email"
-                  />
+                <Button
+                  btnClass="primary"
+                  onClick={this.submitBtnHandler}
+                  btnText="Start Your Service"
+                />
+              </form>
+            </IndexPageForm>
 
-                  <Field
-                    placeholder="Email"
-                    name=""
-                    value={appState.data.zip}
-                    onChange={this.updateZip}
-                    inputClass={this.state.errorClassName}
-                    wrapperClass=""
-                    id="userZip"
-                    type="text"
-                  />
+            <IndexPageText />
 
-                  <span className={ this.state.errorClassName }>{ this.state.errorMsg }</span>
+            <h6 className="terms">*Terms & Conditions apply. <a href="https://www.tamaramellon.com/pages/our-info#faq-5-4">More info.</a></h6>
+          </IndexPageContent>
 
-                  <Button
-                    btnClass="primary"
-                    onClick={this.submitBtnHandler}
-                    btnText="Start Your Service"
-                  />
-                  {
-                    // <button className="btn primary start"
-                    //   onClick={ this.submitBtnHandler }>Start Your Service
-                    //   {
-                    //     // {this.state.loading ? <Loading /> : null}
-                    //   }
-                    // </button>
-                  }
+        </IndexPageLayout>
+        {
+          // {this.state.loading && <SpinnerPopup />}
+        }
 
-                </form>
-              </div>
 
-              {
-                // <Content />
-              }
-
-              <h6 className='terms'>*Terms & Conditions apply. <a href="https://www.tamaramellon.com/pages/our-info#faq-5-4">More info.</a></h6>
-
-            </div>
-          </div>
-        </section>
       </>
 		);
 	}

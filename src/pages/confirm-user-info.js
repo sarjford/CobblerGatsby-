@@ -1,17 +1,18 @@
 import React from 'react';
 import axios from 'axios';
+import { navigate } from 'gatsby';
 
-
+import SEO from '../components/seo';
 import { AppContext } from '../components/Context';
 import Field from '../components/userInfoField';
 import Button from '../components/button';
+import Navigation from '../components/navigation';
+import PageContainer from '../components/pageContainer';
 
 
 
 // import Unsuccessful from './unsuccessful.js';
 // import Loading from '../common/loading.js';
-
-
 
 export default class Info extends React.Component {
 
@@ -82,37 +83,24 @@ export default class Info extends React.Component {
 
   submitOrder = (e) => {
     e.preventDefault();
-    // let apiUrl = '';
-    let orderObject = this.createOrderObj();
-
+    const orderObject = this.createOrderObj();
     console.log(orderObject)
 
-    axios({
-      method: 'post',
-      url: 'https://orders.cobblerconcierge.com/api/partners/tm/orders',
-      data: orderObject,
-      headers: {
-        'Authorization': 'enzy9PvHnnuBJo2mHosLQQCq',
-        'Accept': 'application/vnd.CcOps.v1, application/json',
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-      },
-    }).then(function (response) {
-        console.log(response)
-      });
+    if (this.state.error) {
+      return;
+    }
 
-    // if (this.state.error) {
-    //   return;
-    // }
+    this.setState({ loading: true });
 
-    // this.setState({ loading: true });
+    // setTimeout(function() {
+    //   navigate('/confirmation-page');
+    // }, 500)
 
     // if (window.location.href.indexOf('local') > -1) {
     //   apiUrl = 'http://4071c6b2.ngrok.io/order';
     // } else {
     //   apiUrl = 'https://tm-cobbler.herokuapp.com/order';
     // }
-
     // request.post(apiUrl)
     //   .send(orderObject)
     //   .set('Accept', 'application/json')
@@ -132,6 +120,20 @@ export default class Info extends React.Component {
     //       console.log('error', err);
     //     }
     //   }.bind(this));
+
+    axios({
+      method: 'post',
+      url: 'https://orders.cobblerconcierge.com/api/partners/tm/orders',
+      data: orderObject,
+      headers: {
+        'Authorization': 'enzy9PvHnnuBJo2mHosLQQCq',
+        'Accept': 'application/vnd.CcOps.v1, application/json',
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      },
+    }).then(function (response) {
+        console.log(response)
+      });
   }
 
   updateInputValue = (e) => {
@@ -141,179 +143,124 @@ export default class Info extends React.Component {
     });
   }
 
-  startOver = () => {
-    // route('/');
-  }
-
   render() {
     const appState = this.context;
 
     return (
-      <section className='page-container'>
-        <section className='user-info-page'>
-        {
-          // {this.state.loading ? <Loading /> : null }
-          // {this.state.error ? <Unsuccessful startOver={this.startOver} /> : null }
-        }
-
-          <h2>Confirm your contact and shipping information:</h2>
-
-          <div className="contact-field-container">
-
-            <Field
-              placeholder="First Name*"
-              name="first_name"
-              value={appState.data.first_name}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.first_name.length > 0 ? '' : 'error'}
-              wrapperClass=""
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="Last Name*"
-              name="last_name"
-              value={appState.data.last_name}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.last_name.length > 0 ? '' : 'error'}
-              wrapperClass=""
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="Address Line 1*"
-              name="address1"
-              value={appState.data.address1}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.address1.length > 0 ? '' : 'error'}
-              wrapperClass="full-width-field"
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="Address Line 2*"
-              name="address2"
-              value={appState.data.address2}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.address2.length > 0 ? '' : 'error'}
-              wrapperClass="full-width-field"
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="City*"
-              name="city"
-              value={appState.data.city}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.city.length > 0 ? '' : 'error'}
-              wrapperClass="full-width-field"
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="State*"
-              name="province"
-              value={appState.data.province}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.province.length > 0 ? '' : 'error'}
-              wrapperClass=""
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="Zip*"
-              name="zip"
-              value={appState.data.zip}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.zip.length > 0 ? '' : 'error'}
-              wrapperClass=""
-              id=""
-              type=""
-            />
-
-            <Field
-              placeholder="Phone*"
-              name="phone"
-              value={appState.data.phone}
-              onChange={this.updateInputValue}
-              inputClass={appState.data.phone.length > 0 ? '' : 'error'}
-              wrapperClass="full-width-field"
-              id=""
-              type=""
-            />
+      <>
+        <SEO title="Confirm User Info Page" />
+        <Navigation />
+        <PageContainer>
+          <section>
             {
-            // <div>
-            //   <input
-            //   value={appState.data.first_name}
-            //   onChange={this.updateInputValue}
-            //   placeholder="First Name*"
-            //   name="first_name"
-            //   className={appState.data.first_name.length > 0 ? '' : 'error'}
-            //   />
-            //   <div></div>
-            // </div>
+              // {this.state.loading ? <Loading /> : null }
+              // {this.state.error ? <Unsuccessful startOver={this.startOver} /> : null }
+            }
 
-            // <div>
-            //   <input value={appState.data.last_name} onChange={this.updateInputValue} placeholder="Last Name*" name="last_name"
-            //   className={appState.data.last_name.length > 0 ? '' : 'error'}
-            //   />
-            //   <div></div>
-            // </div>
+            <header className="step-page-header">
+              <h2>Confirm your contact and shipping information:</h2>
+            </header>
 
-            // <div className="full-width-field">
-            //   <input value={appState.data.address1} onChange={this.updateInputValue} placeholder="Address Line 1*" name="address1"
-            //   className={appState.data.address1.length > 0 ? '' : 'error'}/>
-            //   <div></div>
-            // </div>
+            <div>
 
-            // <div className="full-width-field">
-            //   <input value={appState.data.address2} onChange={this.updateInputValue} placeholder="Address Line 2" name="address2"/>
-            // </div>
+              <Field
+                placeholder="First Name*"
+                name="first_name"
+                value={appState.data.first_name}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.first_name.length > 0 ? '' : 'error'}
+                wrapperClass=""
+                id=""
+                type=""
+              />
 
-            // <div className="full-width-field">
-            //   <input value={appState.data.city} onChange={this.updateInputValue} placeholder="City*" name="city"
-            //   className={appState.data.city.length > 0 ? '' : 'error'}
-            //   />
-            //   <div></div>
-            // </div>
+              <Field
+                placeholder="Last Name*"
+                name="last_name"
+                value={appState.data.last_name}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.last_name.length > 0 ? '' : 'error'}
+                wrapperClass=""
+                id=""
+                type=""
+              />
 
-            // <div>
-            //   <input value={appState.data.province} onChange={this.updateInputValue} placeholder="State*" name="province"
-            //   className={appState.data.province.length > 0 ? '' : 'error'}
-            //   />
-            //   <div></div>
-            // </div>
+              <Field
+                placeholder="Address Line 1*"
+                name="address1"
+                value={appState.data.address1}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.address1.length > 0 ? '' : 'error'}
+                wrapperClass="full-width-field"
+                id=""
+                type=""
+              />
 
-            // <div>
-            //   <input value={appState.data.zip} onChange={this.updateInputValue} placeholder="Zip Code*" name="zip"
-            //   className={appState.data.zip.length > 0 ? '' : 'error'}
-            //   />
-            //   <div></div>
-            // </div>
+              <Field
+                placeholder="Address Line 2*"
+                name="address2"
+                value={appState.data.address2}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.address2.length > 0 ? '' : 'error'}
+                wrapperClass="full-width-field"
+                id=""
+                type=""
+              />
 
-            // <div className="full-width-field">
-            //   <input value={appState.data.phone} onChange={this.updateInputValue} placeholder="Phone Number*" name="phone" className="full-width"
-            //   className={appState.data.phone.length > 0 ? '' : 'error'}
-            //   />
-            //   <div></div>
-            // </div>
-          }
+              <Field
+                placeholder="City*"
+                name="city"
+                value={appState.data.city}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.city.length > 0 ? '' : 'error'}
+                wrapperClass="full-width-field"
+                id=""
+                type=""
+              />
 
-          </div>
+              <Field
+                placeholder="State*"
+                name="province"
+                value={appState.data.province}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.province.length > 0 ? '' : 'error'}
+                wrapperClass=""
+                id=""
+                type=""
+              />
 
-          <Button
-            btnClass="primary"
-            onClick={this.submitOrder}
-            btnText="Submit Request"
-          />
-        </section>
-      </section>
+              <Field
+                placeholder="Zip*"
+                name="zip"
+                value={appState.data.zip}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.zip.length > 0 ? '' : 'error'}
+                wrapperClass=""
+                id=""
+                type=""
+              />
+
+              <Field
+                placeholder="Phone*"
+                name="phone"
+                value={appState.data.phone}
+                onChange={this.updateInputValue}
+                inputClass={appState.data.phone.length > 0 ? '' : 'error'}
+                wrapperClass="full-width-field"
+                id=""
+                type=""
+              />
+
+            </div>
+
+            <Button
+              btnClass="primary"
+              onClick={this.submitOrder}
+              btnText="Submit Request"
+            />
+          </section>
+        </PageContainer>
+      </>
     );
   }
 }
