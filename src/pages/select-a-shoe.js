@@ -9,24 +9,37 @@ import PageContainer from '../components/pageContainer';
 
 
 const ProductTileGridWrapper = styled.div`
+  div:only-child {
+    margin: 0 auto;
+  }
   @media only screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     margin: 0 -20px;
   }
-`
+`;
+const SelectShoePageContainer = styled.div`
+  @media only screen and (min-width: 768px) {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  @media only screen and (min-width: 1280px) {
+    max-width: 1200px;
+  }
+`;
+
+
 const SelectShoe = () => (
   <>
     <SEO title="Select a Shoe to Repair" />
     <Navigation />
 
     <PageContainer>
-      <section className="page-1-shoes">
+      <SelectShoePageContainer>
 
-      <header className="step-page-header">
-        <h2>Choose your item that needs care:</h2>
-      </header>
+        <header className="step-page-header">
+          <h2>Choose your item that needs care:</h2>
+        </header>
 
         <AppConsumer>
           {({ data, set }) => (
@@ -40,7 +53,7 @@ const SelectShoe = () => (
           )}
         </AppConsumer>
 
-      </section>
+      </SelectShoePageContainer>
     </PageContainer>
   </>
 )

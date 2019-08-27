@@ -11,7 +11,6 @@ import SiteHeader from '../components/siteHeader';
 import IndexPageText from '../components/indexTextContent';
 import Field from '../components/userInfoField';
 import Button from '../components/button';
-import PageContainer from '../components/pageContainer';
 import SpinnerPopup from '../components/spinnerPopup';
 
 
@@ -46,11 +45,14 @@ const IndexPageLayout = styled.div`
     div:nth-child(3) {
       order: 3;
     }
-    @media only screen and (min-width: 1440px) {
-      grid-template-columns: 800px 1fr;
-    }
+  }
+  @media only screen and (min-width: 1440px) {
+    grid-template-columns: 800px 1fr;
+    max-width: 1600px;
+      margin: 0 auto;
   }
 `;
+
 const IndexPageHeroSection = styled.div`
   position: relative;
   img {
@@ -74,7 +76,8 @@ const IndexPageForm = styled.div`
     margin-bottom: 48px;
   }
 `;
-const IndexPageContent = styled(PageContainer)`
+const IndexPageContent = styled.div`
+  padding: 25px 20px;
   margin-bottom: 10px;
   @media only screen and (min-width: 768px) {
     max-width: 500px;

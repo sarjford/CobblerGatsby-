@@ -12,14 +12,8 @@ const TileWrapper = styled.div`
   }
   @media only screen and (min-width: 1280px) {
     width: calc(33% - 40px);
-    &:nth-child(4n):last-child {
-      flex-basis: 100%;
-      & > {
-        width: calc(33% - 20px);
-      }
-    }
   }
-`
+`;
 // single shoe
 const TileInner = styled.button`
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);
