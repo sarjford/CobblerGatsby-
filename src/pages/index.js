@@ -180,24 +180,28 @@ export default class IndexPage extends React.Component {
     }
 
     const fetchOrders = (email, zip) => {
-      axios
-        .get(`http://l.tamaramellon.com/api/returns/users?email=${email}&pc=${zip}`)
+
+      // fetch(`/.netlify/functions/user?email=${email}&pc=${zip}`)
+      //   .then(response => response.json())
+
+      fetch(`/.netlify/functions/user?email=${email}&pc=${zip}`)
+        .then(response => response.json())
         .then(orders => {
           console.log('orders ', orders)
 
-          if (orders.data.length === 0) {
-            this.setState({
-              errorMsg: 'No orders found. For futher assistance, call our customer service team at (866) 419-5500.',
-              loading: false
-            });
-            return;
-          }
-          
-          appState.set({
-            ...orders.data[0].customer,
-            data: orders.data
-          });
-          navigate('/select-a-shoe');
+          // if (orders.data.length === 0) {
+          //   this.setState({
+          //     errorMsg: 'No orders found. For futher assistance, call our customer service team at (866) 419-5500.',
+          //     loading: false
+          //   });
+          //   return;
+          // }
+          //
+          // appState.set({
+          //   ...orders.data[0].customer,
+          //   data: orders.data
+          // });
+          // navigate('/select-a-shoe');
         })
         .catch(error => {
           console.log(error)
@@ -215,8 +219,11 @@ export default class IndexPage extends React.Component {
       return;
     }
     // otherwise, continue
-    this.setState({ emailError: false, zipError: false, errorMsg: '', loading: true });
+    // this.setState({ emailError: false, zipError: false, errorMsg: '', loading: true });
     fetchOrders(email, zip);
+
+
+
   }
 
 	render() {

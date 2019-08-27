@@ -20,7 +20,10 @@
     "gatsby-source-filesystem": "^2.1.9",
     "gatsby-source-shopify": "^3.0.0",
     "gatsby-transformer-sharp": "^2.2.6",
+    "http-proxy-middleware": "^0.19.1",
+    "netlify-lambda": "^1.6.3",
     "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -28,9 +31,6 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
-    "http-proxy-middleware": "^0.19.1",
-    "netlify-lambda": "^1.6.3",
-    "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2"
   },
   "keywords": [
@@ -38,12 +38,13 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "start": "run-p start:**",
+    "start:app": "npm run develop",
+    "start:lambda": "netlify-lambda serve src/lambda",
+    "build": "run-p build:**",
+    "build:app": "gatsby build",
+    "build:lambda": "netlify-lambda build src/lambda"
   },
   "repository": {
     "type": "git",
