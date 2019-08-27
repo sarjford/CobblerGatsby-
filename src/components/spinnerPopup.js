@@ -1,3 +1,15 @@
+import React, { Component } from "react";
+import styled, { keyframes } from "styled-components";
+
+
+class SpinnerPopup extends Component {
+  render() {
+  }
+}
+export default SpinnerPopup
+
+
+
 // import React from 'react';
 //
 // import './spinnerPopup.scss';

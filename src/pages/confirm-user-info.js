@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { navigate } from 'gatsby';
 
 import SEO from '../components/seo';
@@ -92,6 +91,26 @@ export default class Info extends React.Component {
 
     this.setState({ loading: true });
 
+    fetch(`/.netlify/functions/order`, {
+        method: 'POST',
+        body: JSON.stringify(orderObject)
+      })
+      .then(response => response.json())
+      .then(jsonRes => {
+        if (jsonRes.success) {
+          console.log('successful post to api')
+          // window.scrollTo(0, 0);
+          navigate('/confirmation-page');
+        } else {
+          console.log('unsuccessful post to api')
+          this.setState({ loading: false, error: true });
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        this.setState({ loading: false, error: true });
+      });
+
     // setTimeout(function() {
     //   navigate('/confirmation-page');
     // }, 500)
@@ -120,20 +139,6 @@ export default class Info extends React.Component {
     //       console.log('error', err);
     //     }
     //   }.bind(this));
-
-    axios({
-      method: 'post',
-      url: 'https://orders.cobblerconcierge.com/api/partners/tm/orders',
-      data: orderObject,
-      headers: {
-        'Authorization': 'enzy9PvHnnuBJo2mHosLQQCq',
-        'Accept': 'application/vnd.CcOps.v1, application/json',
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-      },
-    }).then(function (response) {
-        console.log(response)
-      });
   }
 
   updateInputValue = (e) => {

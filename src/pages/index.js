@@ -1,9 +1,7 @@
 import React from "react"
 import { navigate } from 'gatsby';
-import axios from 'axios';
 import styled from 'styled-components';
 
-// import indexStyles from "./index.module.scss"
 
 // import Layout from "../components/layout"
 // import Image from "../components/image"
@@ -180,28 +178,24 @@ export default class IndexPage extends React.Component {
     }
 
     const fetchOrders = (email, zip) => {
-
-      // fetch(`/.netlify/functions/user?email=${email}&pc=${zip}`)
-      //   .then(response => response.json())
-
       fetch(`/.netlify/functions/user?email=${email}&pc=${zip}`)
         .then(response => response.json())
-        .then(orders => {
-          console.log('orders ', orders)
+        .then(data => {
+          const orders = JSON.parse(data);
 
-          // if (orders.data.length === 0) {
-          //   this.setState({
-          //     errorMsg: 'No orders found. For futher assistance, call our customer service team at (866) 419-5500.',
-          //     loading: false
-          //   });
-          //   return;
-          // }
-          //
-          // appState.set({
-          //   ...orders.data[0].customer,
-          //   data: orders.data
-          // });
-          // navigate('/select-a-shoe');
+          if (orders.length === 0) {
+            this.setState({
+              errorMsg: 'No orders found. Please check your email and/or zip code and try again. For futher assistance, call our customer service team at (866) 419-5500.',
+              loading: false
+            });
+            return;
+          }
+
+          appState.set({
+            ...orders[0].customer,
+            data: orders
+          });
+          navigate('/select-a-shoe');
         })
         .catch(error => {
           console.log(error)
@@ -209,7 +203,7 @@ export default class IndexPage extends React.Component {
             errorMsg: error.response.text,
             loading: false
           });
-        })
+        });
       }
 
     // if there are errors, update state and exit function
@@ -221,9 +215,6 @@ export default class IndexPage extends React.Component {
     // otherwise, continue
     // this.setState({ emailError: false, zipError: false, errorMsg: '', loading: true });
     fetchOrders(email, zip);
-
-
-
   }
 
 	render() {
@@ -290,9 +281,9 @@ export default class IndexPage extends React.Component {
           </IndexPageContent>
 
         </IndexPageLayout>
-        {
-          // {this.state.loading && <SpinnerPopup />}
-        }
+
+          {this.state.loading && <SpinnerPopup />}
+        
 
 
       </>
