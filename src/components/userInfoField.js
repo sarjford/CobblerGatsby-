@@ -12,27 +12,21 @@ const Input = styled.input`
   width: 100%;
   margin: 0 auto;
   margin-bottom: 10px;
-  &.input-box-error {
-    border: 1px solid #ff6d6d;
-  }
-`
-const InputError = styled.div`
-
-`
+`;
 
 const Field = (props) => (
-    <>
+    <div className={props.wrapperClass}>
       <Input
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}
         name={props.name}
-        className={props.error ? 'input-box-error' : ''}
+        className={props.error ? `input-box-error` : ``}
         id={props.id}
         type={props.type}
       />
-      <InputError></InputError>
-    </>
+      <div></div>
+    </div>
   )
 
 export default Field;

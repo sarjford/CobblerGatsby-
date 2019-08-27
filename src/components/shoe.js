@@ -5,6 +5,7 @@ import { AppContext } from '../components/Context';
 import ProductTile from '../components/productTile';
 
 
+
 export default class Shoe extends React.Component {
 
 	constructor(props) {

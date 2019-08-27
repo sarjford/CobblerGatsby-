@@ -12,6 +12,39 @@ import SpinnerPopup from '../components/spinnerPopup';
 import ContactUs from '../components/contactUs';
 
 
+const ThisPageContainer = styled.div`
+  max-width: 572px;
+  margin: 0 auto;
+
+  .contact-field-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .full-width-field {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  input {
+    &.input-box-error {
+      border: 1px solid #ff6d6d;
+      & + div:after {
+        content: "Please enter a value";
+        display: block;
+        position: relative;
+        color: #ff6d6d;
+        width: 100%;
+        font-family: 'Futura', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+`
+
 const Unsuccessful = styled.div`
   margin-bottom: 30px;
 
@@ -118,9 +151,9 @@ export default class Info extends React.Component {
     const orderObject = this.createOrderObj();
     console.log(orderObject)
 
-    // if (this.state.error) {
-    //   return;
-    // }
+    if (this.state.error) {
+      return;
+    }
 
     this.setState({ loading: true });
 
@@ -160,7 +193,7 @@ export default class Info extends React.Component {
         <SEO title="Confirm User Info Page" />
         <Navigation />
         <PageContainer>
-          <section>
+          <ThisPageContainer>
 
             {this.state.error && <UnsuccessfulSubmissionPopup />}
 
@@ -168,14 +201,14 @@ export default class Info extends React.Component {
               <h2>Confirm your contact and shipping information:</h2>
             </header>
 
-            <div>
+            <div className="contact-field-container">
 
               <Field
                 placeholder="First Name*"
                 name="first_name"
                 value={appState.data.first_name}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.first_name.length > 0 ? '' : 'error'}
+                error={appState.data.first_name.length > 0 ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -186,7 +219,7 @@ export default class Info extends React.Component {
                 name="last_name"
                 value={appState.data.last_name}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.last_name.length > 0 ? '' : 'error'}
+                error={appState.data.last_name.length > 0 ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -197,18 +230,17 @@ export default class Info extends React.Component {
                 name="address1"
                 value={appState.data.address1}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.address1.length > 0 ? '' : 'error'}
+                error={appState.data.address1.length > 0 ? false : true}
                 wrapperClass="full-width-field"
                 id=""
                 type=""
               />
 
               <Field
-                placeholder="Address Line 2*"
+                placeholder="Address Line 2"
                 name="address2"
                 value={appState.data.address2}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.address2.length > 0 ? '' : 'error'}
                 wrapperClass="full-width-field"
                 id=""
                 type=""
@@ -219,7 +251,7 @@ export default class Info extends React.Component {
                 name="city"
                 value={appState.data.city}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.city.length > 0 ? '' : 'error'}
+                error={appState.data.city.length > 0 ? false : true}
                 wrapperClass="full-width-field"
                 id=""
                 type=""
@@ -230,7 +262,7 @@ export default class Info extends React.Component {
                 name="province"
                 value={appState.data.province}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.province.length > 0 ? '' : 'error'}
+                error={appState.data.province.length > 0 ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -241,7 +273,7 @@ export default class Info extends React.Component {
                 name="zip"
                 value={appState.data.zip}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.zip.length > 0 ? '' : 'error'}
+                error={appState.data.zip.length > 0 ? '' : 'error'}
                 wrapperClass=""
                 id=""
                 type=""
@@ -252,7 +284,7 @@ export default class Info extends React.Component {
                 name="phone"
                 value={appState.data.phone}
                 onChange={this.updateInputValue}
-                inputClass={appState.data.phone.length > 0 ? '' : 'error'}
+                error={appState.data.phone.length > 0 ? '' : 'error'}
                 wrapperClass="full-width-field"
                 id=""
                 type=""
@@ -265,7 +297,7 @@ export default class Info extends React.Component {
               onClick={this.submitOrder}
               btnText="Submit Request"
             />
-          </section>
+          </ThisPageContainer>
         </PageContainer>
         {this.state.loading && <SpinnerPopup />}
       </>

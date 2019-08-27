@@ -249,7 +249,7 @@ export default class IndexPage extends React.Component {
             <IndexPageForm>
               <h3>Start Your Service</h3>
               <p>Enter your email and zip code below to start the care process.</p>
-              <form>
+              <form className="field-parent">
                 <Field
                   placeholder="Email"
                   name=""
