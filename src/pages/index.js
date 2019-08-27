@@ -12,7 +12,7 @@ import IndexPageText from '../components/indexTextContent';
 import Field from '../components/userInfoField';
 import Button from '../components/button';
 import PageContainer from '../components/pageContainer';
-// import SpinnerPopup from '../components/spinnerPopup';
+import SpinnerPopup from '../components/spinnerPopup';
 
 
 
@@ -112,7 +112,7 @@ export default class IndexPage extends React.Component {
       errorMsg: '',
       emailError: '',
       zipError: '',
-      loading: true
+      loading: false
     }
   }
 
@@ -213,7 +213,12 @@ export default class IndexPage extends React.Component {
       return;
     }
     // otherwise, continue
-    // this.setState({ emailError: false, zipError: false, errorMsg: '', loading: true });
+    this.setState({
+      emailError: false,
+      zipError: false,
+      errorMsg: '',
+      loading: true
+    });
     fetchOrders(email, zip);
   }
 
@@ -282,10 +287,7 @@ export default class IndexPage extends React.Component {
 
         </IndexPageLayout>
 
-          {this.state.loading && <SpinnerPopup />}
-        
-
-
+        {this.state.loading && <SpinnerPopup />}
       </>
 		);
 	}

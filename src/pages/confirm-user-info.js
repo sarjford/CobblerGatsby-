@@ -1,5 +1,6 @@
 import React from 'react';
 import { navigate } from 'gatsby';
+import styled from 'styled-components';
 
 import SEO from '../components/seo';
 import { AppContext } from '../components/Context';
@@ -7,11 +8,44 @@ import Field from '../components/userInfoField';
 import Button from '../components/button';
 import Navigation from '../components/navigation';
 import PageContainer from '../components/pageContainer';
+import SpinnerPopup from '../components/spinnerPopup';
+import ContactUs from '../components/contactUs';
 
 
 
-// import Unsuccessful from './unsuccessful.js';
-// import Loading from '../common/loading.js';
+const Unsuccessful = styled.div`
+  margin-bottom: 30px;
+
+  p, h2, a {
+    color: #ff6d6d;
+    font-size: 14px;
+  }
+
+  .contact h2 {
+    margin-bottom: 0;
+  }
+
+  span {
+    cursor: pointer;
+    color: #ff6d6d;
+    text-decoration: underline;
+  }
+  > div {
+    margin: 0 auto;
+  }
+`
+
+const UnsuccessfulSubmissionPopup = props => {
+  const startOver = () => {
+    navigate('/');
+  }
+  return (
+    <Unsuccessful>
+      <p>There was an issue processing your request. Review your information below, try submitting a <span onClick={startOver}>new request</span> or reach out to our client services team for futher assistance.</p>
+      <ContactUs />
+    </Unsuccessful>
+  )
+}
 
 export default class Info extends React.Component {
 
@@ -85,9 +119,9 @@ export default class Info extends React.Component {
     const orderObject = this.createOrderObj();
     console.log(orderObject)
 
-    if (this.state.error) {
-      return;
-    }
+    // if (this.state.error) {
+    //   return;
+    // }
 
     this.setState({ loading: true });
 
@@ -110,35 +144,6 @@ export default class Info extends React.Component {
         console.log(error)
         this.setState({ loading: false, error: true });
       });
-
-    // setTimeout(function() {
-    //   navigate('/confirmation-page');
-    // }, 500)
-
-    // if (window.location.href.indexOf('local') > -1) {
-    //   apiUrl = 'http://4071c6b2.ngrok.io/order';
-    // } else {
-    //   apiUrl = 'https://tm-cobbler.herokuapp.com/order';
-    // }
-    // request.post(apiUrl)
-    //   .send(orderObject)
-    //   .set('Accept', 'application/json')
-    //   .then(function(res) {
-    //     if (JSON.parse(res.body.status) == 200) {
-    //       console.log('successful post to api')
-    //       window.scrollTo(0, 0);
-    //       route('/complete');
-    //     } else {
-    //       console.log('unsuccessful post to api')
-    //       this.setState({ loading: false, error: true });
-    //     }
-    //
-    //   }.bind(this))
-    //   .catch(function(err) {
-    //     if (err) {
-    //       console.log('error', err);
-    //     }
-    //   }.bind(this));
   }
 
   updateInputValue = (e) => {
@@ -157,10 +162,8 @@ export default class Info extends React.Component {
         <Navigation />
         <PageContainer>
           <section>
-            {
-              // {this.state.loading ? <Loading /> : null }
-              // {this.state.error ? <Unsuccessful startOver={this.startOver} /> : null }
-            }
+
+            {this.state.error && <UnsuccessfulSubmissionPopup />}
 
             <header className="step-page-header">
               <h2>Confirm your contact and shipping information:</h2>
@@ -265,6 +268,7 @@ export default class Info extends React.Component {
             />
           </section>
         </PageContainer>
+        {this.state.loading && <SpinnerPopup />}
       </>
     );
   }
