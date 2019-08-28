@@ -47,7 +47,6 @@ const SelectShoe = () => (
         <AppConsumer>
           {({ data, set }) => (
             <ProductTileGridWrapper>
-              {console.log(JSON.stringify(data.data))}
               {data.data.map((shoe, i) => (
                 <Shoe data={shoe} key={i} index={i}/>
                 )

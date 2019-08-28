@@ -95,6 +95,17 @@ export default class Info extends React.Component {
   }
   static contextType = AppContext;
 
+  componentDidMount() {
+    const appState = this.context;
+    const appStateData = appState.data;
+
+    console.log(appStateData)
+
+    if (!appStateData.first_name) {
+      navigate('/');
+    }
+  }
+
   createOrderObj = () => {
     const appState = this.context;
     const appStateData = appState.data;
@@ -154,7 +165,6 @@ export default class Info extends React.Component {
   submitOrder = (e) => {
     e.preventDefault();
     const orderObject = this.createOrderObj();
-    console.log(orderObject)
 
     if (this.state.error) {
       return;
@@ -170,7 +180,6 @@ export default class Info extends React.Component {
       .then(jsonRes => {
         if (jsonRes.success) {
           console.log('successful post to api')
-          // window.scrollTo(0, 0);
           navigate('/confirmation-page');
         } else {
           console.log('unsuccessful post to api')
