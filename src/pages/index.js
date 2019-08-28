@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 // import Layout from "../components/layout"
-// import Image from "../components/image"
+import Image from "../components/image"
 import SEO from "../components/seo"
 import { AppContext } from '../components/Context';
 import SiteHeader from '../components/siteHeader';
@@ -236,11 +236,13 @@ export default class IndexPage extends React.Component {
           <SiteHeader />
 
           <IndexPageHeroSection>
-            <picture>
-              <source media="(min-width: 1024px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_large_1.jpg?772610"/>
-              <source media="(min-width: 768px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_tablet.jpg?772608"/>
-              <img src="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_mobile.jpg?772608" alt="" />
-            </picture>
+
+          <picture>
+            <source media="(min-width: 1024px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_large_1.jpg?772610"/>
+            <source media="(min-width: 768px)" srcSet="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_tablet.jpg?772608"/>
+            <img src="https://cdn.shopify.com/s/files/1/1103/4464/files/Cobbler_Care_mobile.jpg?772608" alt="" />
+          </picture>
+
             <MobileHeader>Cobbler<br/>Concierge</MobileHeader>
           </IndexPageHeroSection>
 
