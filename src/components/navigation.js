@@ -4,9 +4,9 @@ import { navigate } from 'gatsby';
 
 // currentPath: [currentStep, previousPath]
 const previousStepMap = {
-  '/select-a-shoe': ['1', '/'],
-  '/select-repairs': ['2', '/select-a-shoe'],
-  '/confirm-user-info': ['3', '/select-repairs']
+  'select-a-shoe': ['1', '/'],
+  'select-repairs': ['2', '/select-a-shoe'],
+  'confirm-user-info': ['3', '/select-repairs']
 }
 
 const NavWrapper = styled.section`
@@ -50,11 +50,11 @@ const BackwardsIcon = styled.svg`
 const Navigation = props => {
 
   const navigateBack = () => {
-    const prevStep = previousStepMap[window.location.pathname][1];
+    const prevStep = previousStepMap[props.page][1];
     navigate(prevStep);
   }
 
-  const currentStep = previousStepMap[window.location.pathname][0];
+  const currentStep = previousStepMap[props.page][0];
 
   return (
     <NavWrapper>

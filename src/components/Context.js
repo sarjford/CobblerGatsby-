@@ -2,11 +2,36 @@ import React from 'react';
 
 const initialState = {
   data: {
-    selectedShoeIndex: 0,
-    selectedRepairs: [],
+    address1: "",
+    address2: "",
+    city: "",
+    company: "",
+    country_code: "",
+    country_name: "",
+    customer_id: 0,
+    data: [{
+      customer: {},
+      date: "",
+      imageId: 0,
+      imageSrc: "",
+      name: "",
+      options: "",
+      order: 0,
+      price: "",
+      product: 0,
+      refunds: [],
+      variant: 0
+    }],
     email: "",
-    zip: '',
-    data: '',
+    first_name: "",
+    id: 0,
+    last_name: "",
+    phone: "",
+    province: "",
+    province_code: "",
+    selectedRepairs: [],
+    selectedShoeIndex: 0,
+    zip: ""
   },
   set: () => {},
 }
@@ -36,7 +61,6 @@ class AppProvider extends React.Component {
   }
 
   render() {
-    console.log('inside app provider ', this.state)
     return <Provider value={this.state}>{this.props.children}</Provider>
   }
 }

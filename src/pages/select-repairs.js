@@ -150,7 +150,7 @@ export default class Repairs extends React.Component {
     return (
       <>
         <SEO title="Select Repairs" />
-        <Navigation />
+        <Navigation page="select-repairs"/>
 
         <PageContainer>
           <PageWrapper>

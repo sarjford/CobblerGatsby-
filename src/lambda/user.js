@@ -33,7 +33,7 @@ export function handler(event, context, callback) {
     });
 
   }).on('error', (e) => {
-    console.error(e);
-    callback(Error(e))
+    console.log('ERROR', e);
+    callback(e)
   });
 }

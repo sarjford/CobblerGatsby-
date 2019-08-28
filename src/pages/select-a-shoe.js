@@ -35,7 +35,7 @@ const SelectShoePageContainer = styled.div`
 const SelectShoe = () => (
   <>
     <SEO title="Select a Shoe to Repair" />
-    <Navigation />
+    <Navigation page="select-a-shoe"/>
 
     <PageContainer>
       <SelectShoePageContainer>

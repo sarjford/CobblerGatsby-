@@ -205,7 +205,7 @@ export default class Info extends React.Component {
     return (
       <>
         <SEO title="Confirm User Info Page" />
-        <Navigation />
+        <Navigation page="confirm-user-info"/>
         <PageContainer>
           <ThisPageContainer>
 
@@ -222,7 +222,7 @@ export default class Info extends React.Component {
                 name="first_name"
                 value={appState.data.first_name}
                 onChange={this.updateInputValue}
-                error={appState.data.first_name.length > 0 ? false : true}
+                error={appState.data.first_name ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -233,7 +233,7 @@ export default class Info extends React.Component {
                 name="last_name"
                 value={appState.data.last_name}
                 onChange={this.updateInputValue}
-                error={appState.data.last_name.length > 0 ? false : true}
+                error={appState.data.last_name ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -244,7 +244,7 @@ export default class Info extends React.Component {
                 name="address1"
                 value={appState.data.address1}
                 onChange={this.updateInputValue}
-                error={appState.data.address1.length > 0 ? false : true}
+                error={appState.data.address1 ? false : true}
                 wrapperClass="full-width-field"
                 id=""
                 type=""
@@ -265,7 +265,7 @@ export default class Info extends React.Component {
                 name="city"
                 value={appState.data.city}
                 onChange={this.updateInputValue}
-                error={appState.data.city.length > 0 ? false : true}
+                error={appState.data.city ? false : true}
                 wrapperClass="full-width-field"
                 id=""
                 type=""
@@ -276,7 +276,7 @@ export default class Info extends React.Component {
                 name="province"
                 value={appState.data.province}
                 onChange={this.updateInputValue}
-                error={appState.data.province.length > 0 ? false : true}
+                error={appState.data.province ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -287,7 +287,7 @@ export default class Info extends React.Component {
                 name="zip"
                 value={appState.data.zip}
                 onChange={this.updateInputValue}
-                error={appState.data.zip.length > 0 ? '' : 'error'}
+                error={appState.data.zip ? false : true}
                 wrapperClass=""
                 id=""
                 type=""
@@ -298,7 +298,7 @@ export default class Info extends React.Component {
                 name="phone"
                 value={appState.data.phone}
                 onChange={this.updateInputValue}
-                error={appState.data.phone.length > 0 ? '' : 'error'}
+                error={appState.data.phone ? false : true}
                 wrapperClass="full-width-field"
                 id=""
                 type=""

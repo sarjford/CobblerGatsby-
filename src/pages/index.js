@@ -184,6 +184,8 @@ export default class IndexPage extends React.Component {
         .then(data => {
           const orders = JSON.parse(data);
 
+          console.log(orders)
+
           if (orders.length === 0) {
             this.setState({
               errorMsg: 'No orders found. Please check your email and/or zip code and try again. For futher assistance, call our customer service team at (866) 419-5500.',
@@ -198,7 +200,8 @@ export default class IndexPage extends React.Component {
           });
           navigate('/select-a-shoe');
         })
-        .catch(error => {
+        .catch(err => {
+          const error = JSON.parse(err);
           console.log(error)
           this.setState({
             errorMsg: error.response.text,
