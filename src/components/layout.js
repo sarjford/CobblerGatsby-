@@ -1,13 +1,13 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react';
+import PropTypes from 'prop-types';
 // import { useStaticQuery, graphql } from "gatsby"
-import { AppProvider } from "./Context"
-
+import { AppProvider } from './Context';
+import Transition from '../components/transition';
 
 import "../fonts/futura.scss"
 import "./layout.scss"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   // const data = useStaticQuery(graphql`
   //   query SiteTitleQuery {
   //     site {
@@ -20,7 +20,9 @@ const Layout = ({ children }) => {
 
   return (
     <AppProvider>
-      <main>{children}</main>
+      <Transition location = {location}>
+        <main>{children}</main>
+      </Transition>
     </AppProvider>
   )
 }
