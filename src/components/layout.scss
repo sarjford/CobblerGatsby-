@@ -56,6 +56,7 @@ ul {
 
 header.step-page-header {
   text-align: center;
+  margin: 0 0 20px;
 }
 
 .red-underline {
@@ -65,31 +66,6 @@ header.step-page-header {
     cursor: pointer;
   }
 }
-// input {
-//   font-size: 0.75rem; //12
-//   letter-spacing: .5px;
-//   padding: 17px 14px;
-//   box-sizing: border-box;
-//   border: solid 1px #cccccc;
-//   display: block;
-//   width: 100%;
-//   margin: 0 auto;
-//   margin-bottom: 10px;
-// }
-// .btn {
-//   display: block;
-//   font-size: 0.875rem;
-//   letter-spacing: 1px;
-//   text-transform: uppercase;
-//   cursor: pointer;
-//   box-sizing: border-box;
-//   font-weight: 800;
-//   padding: 16px 0;
-//   width: 100%;
-//   text-align: center;
-//   text-decoration: none;
-//   margin-bottom: 10px;
-// }
 
 .primary {
   background: #000;
@@ -102,40 +78,14 @@ header.step-page-header {
   color: #000;
 }
 
-// navigation {
-//   height: 50px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   a {
-//     display: block;
-//   }
-//   svg {
-//     width: 175px;
-//   }
-// }
-
-// .page-container {
-//   padding: 25px 20px;
-// }
-
-
-// @media only screen and (min-width: 768px) {
-//   .page-container {
-//     padding: 40px;
-//   }
-// }
-
-
+@media only screen and (min-width: 768px) {
+  header.step-page-header {
+    text-align: center;
+    margin: 0 0 38px;
+  }
+}
 
 @media only screen and (min-width: 1024px) {
-//   .page-container-home {
-//     width: 70%;
-//     max-width: 1000px;
-//   }
-//   .page-container, .progress-bar > div, .unsuccessful > div {
-//     max-width: 550px;
-//   }
 
   .primary {
     &:hover {

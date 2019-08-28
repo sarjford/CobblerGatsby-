@@ -14,6 +14,7 @@ const TileWrapper = styled.div`
     width: calc(33% - 40px);
   }
 `;
+
 // single shoe
 const TileInner = styled.button`
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.1);

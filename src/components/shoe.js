@@ -10,17 +10,15 @@ export default class Shoe extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.selectShoe = this.selectShoe.bind(this);
 	}
 
   static contextType = AppContext;
 
-	selectShoe(){
+	selectShoe = () => {
     const appState = this.context;
 		appState.set({
 			selectedShoeIndex: this.props.index,
 		});
-    // window.scrollTo(0, 0);
     navigate('/select-repairs');
 	}
 

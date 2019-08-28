@@ -22,10 +22,11 @@ const CheckboxError = styled.p`
 const HelpLink = styled.div`
   margin: 30px 0 32px;
   text-align: center;
-  a {
+  button {
     padding-bottom: 3px;
-    border-bottom: 2px solid #7f272b;
+    background-color: transparent;
     cursor: pointer;
+    font-size: 14px;
   }
 `
 const FeaturedProduct = styled.div`
@@ -35,6 +36,7 @@ const FeaturedProduct = styled.div`
   }
 `
 const PageHeader = styled.header`
+  text-align: center;
   h2 {
     margin-bottom: 0;
   }
@@ -162,7 +164,7 @@ export default class Repairs extends React.Component {
               />
             </FeaturedProduct>
 
-            <PageHeader className="step-page-header">
+            <PageHeader>
               <h2>What kind of love do they need?</h2>
               <p>Check all that apply.</p>
             </PageHeader>

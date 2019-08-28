@@ -16,18 +16,6 @@ const ThisPageContainer = styled.div`
   max-width: 572px;
   margin: 0 auto;
 
-  .contact-field-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-column-gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .full-width-field {
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-
   input {
     &.input-box-error {
       border: 1px solid #ff6d6d;
@@ -41,6 +29,23 @@ const ThisPageContainer = styled.div`
         font-size: 13px;
         margin-bottom: 10px;
       }
+    }
+  }
+
+  @media only screen and (min-width: 576px) {
+    .contact-field-container {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-column-gap: 10px;
+      margin-bottom: 10px;
+    }
+    .full-width-field {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    button {
+      max-width: 300px;
+      margin: 0 auto;
     }
   }
 `

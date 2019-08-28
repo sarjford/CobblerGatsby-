@@ -12,6 +12,9 @@ const ProductTileGridWrapper = styled.div`
   div:only-child {
     margin: 0 auto;
   }
+  button {
+    cursor: pointer;
+  }
   @media only screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;

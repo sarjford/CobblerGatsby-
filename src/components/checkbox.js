@@ -9,6 +9,7 @@ const CheckboxWrapper = styled.div`
     margin: 0 0 0 20px;
     vertical-align: bottom;
     line-height: 1;
+    cursor: pointer;
   }
   & > div {
     vertical-align: bottom;
@@ -18,6 +19,7 @@ const CheckboxWrapper = styled.div`
     cursor: pointer;
     display: inline-block;
     position: relative;
+
     &::after {
       left: 6px;
       top: 3px;
