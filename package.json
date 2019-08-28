@@ -37,9 +37,6 @@
   "keywords": [
     "gatsby"
   ],
-  "engines": {
-    "node": "12.x"
-  },
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
