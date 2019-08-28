@@ -40,6 +40,7 @@
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
+    "heroku-postbuild": "gatsby build",
     "start": "run-p start:**",
     "start:app": "npm run develop",
     "start:lambda": "netlify-lambda serve src/lambda",
