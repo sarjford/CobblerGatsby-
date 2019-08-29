@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { navigate } from 'gatsby';
 
 import { AppContext } from '../components/Context';
@@ -33,20 +33,3 @@ export default class Shoe extends React.Component {
     )
 	}
 }
-
-  // <div className="shoe-orders">
-    // <button className="single-shoe" onClick={this.selectShoe}>
-    //   <div>
-    //     <div className="img">
-    //       <img src={imgSrc} />
-    //     </div>
-    //
-    //     <div className="info">
-    //       <div>
-    //         <h6>{this.props.data.name}</h6>
-    //         <h5>{details}</h5>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </button>
-  // </div>

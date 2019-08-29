@@ -1,9 +1,8 @@
-import React from "react"
+import React from 'react';
 import { navigate } from 'gatsby';
 import styled from 'styled-components';
 
-import Image from "../components/image"
-import SEO from "../components/seo"
+import SEO from '../components/seo';
 import { AppContext } from '../components/Context';
 import SiteHeader from '../components/siteHeader';
 import IndexPageText from '../components/indexTextContent';

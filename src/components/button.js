@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 
 const ButtonWrapper = styled.button`
@@ -22,9 +22,6 @@ const Button = (props) => (
       onClick={props.onClick}
       className={props.btnClass}
     >{props.btnText}
-    {
-      // {props.loading ? <Loading /> : null}
-    }
     </ButtonWrapper>
   )
 
