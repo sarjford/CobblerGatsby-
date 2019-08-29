@@ -1,10 +1,9 @@
-const axios = require('axios')
+const axios = require('axios');
 const https = require('https');
 
 export function handler(event, context, callback) {
 
   const data = JSON.parse(event.body);
-  console.log(data)
 
   axios({
     method: 'post',

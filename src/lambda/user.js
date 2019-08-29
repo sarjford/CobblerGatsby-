@@ -1,10 +1,7 @@
 const http = require('http');
 const url = require('url');
 
-// For more info, check https://www.netlify.com/docs/functions/#javascript-lambda-functions
 export function handler(event, context, callback) {
-
-  console.log(event)
 
   // build url
   const requestUrl = url.parse(url.format({
@@ -13,8 +10,6 @@ export function handler(event, context, callback) {
       pathname: '/api/returns/users',
       query: event.queryStringParameters
   }));
-
-  console.log(requestUrl)
 
   http.get({
     hostname: requestUrl.hostname,
@@ -34,6 +29,6 @@ export function handler(event, context, callback) {
 
   }).on('error', (e) => {
     console.log('ERROR', e);
-    callback(e)
+    callback(e);
   });
 }
